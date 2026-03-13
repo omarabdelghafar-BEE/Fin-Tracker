@@ -7,6 +7,7 @@ import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/Entities/enums/Roles.enum';
 import { User } from 'src/Entities/user.entity';
 import { CurrentUser } from 'src/auth/decorators/currentUser.decorator';
+import { ApiConsumes, ApiOperation } from '@nestjs/swagger';
 
 @Controller('users')
 export class UserController {
@@ -33,6 +34,8 @@ export class UserController {
 
 
     @Post('register')
+    @ApiConsumes('application/x-www-form-urlencoded')
+    @ApiOperation({ summary: 'Fill your data' })
     async createUser(@Body() user: CreateUserDto){
         try{
             const newUser = await this.userService.register(user)

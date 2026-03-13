@@ -1,4 +1,4 @@
-import {Entity,PrimaryGeneratedColumn,Column,OneToMany,OneToOne,DeleteDateColumn,
+import {Entity,PrimaryGeneratedColumn,Column,OneToMany,OneToOne,DeleteDateColumn, UpdateDateColumn, CreateDateColumn,
 } from 'typeorm';
 import { Role } from './enums/Roles.enum';
 import { Transaction } from './transaction.entity';
@@ -49,6 +49,12 @@ export class User {
     @OneToMany(() => AuthToken, (token) => token.user)
     tokens: AuthToken[];
 
-    @DeleteDateColumn({ nullable: true })
+    @CreateDateColumn()
+    createdAt: Date
+
+    @DeleteDateColumn({ nullable: true })   // 
     deletedAt: Date | null;
+
+    @UpdateDateColumn({ nullable: true })   // will strore the date of the updating
+    updatedAt: Date | null;
 }
